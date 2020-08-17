@@ -4,6 +4,7 @@ const path = require("path");
 
 const render = require("./lib/htmlRenderer");
 
+const Employee = require("./lib/Employee")
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -38,7 +39,7 @@ const buildEngineer = employee => {
             message: 'What is your gitHub username?'
         }
     ])
-        .then(({ github }) => {
+        .then(({ gitHub }) => {
             employees.push(new Engineer(employee.name, employee.id, employee.email, gitHub))
             subMenu()
         })
@@ -65,7 +66,7 @@ const subMenu = () => {
     inquirer.prompt({
         type: 'list',
         name: 'action',
-        choice: ['Make Another Employee', 'Finish'],
+        choices: ['Make Another Employee', 'Finish'],
         message: 'What would you like to do now?'
     })
         .then(({ action }) => {
@@ -77,7 +78,7 @@ const subMenu = () => {
                     const html = render(employees)
                     fs.writeFileSync(path.join(__dirname, 'output',
                     // Should this be main.html or index.html
-                     'main.html'), html)
+                     'index.html'), html)
                     break
 
             }
