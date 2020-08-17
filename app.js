@@ -93,7 +93,7 @@ const mainMenu = () => {
             type: 'list',
             name: 'type',
             choices: ['Employee', 'Manager', 'Engineer', 'Intern'],
-            message: 'Select the type of employee you would like to make'
+            message: 'Select the type of role you would like to make'
         },
         {
             type: 'input',
