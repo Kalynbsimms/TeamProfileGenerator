@@ -35,7 +35,7 @@ const buildEngineer = employee => {
         {
             type: 'input',
             name: 'gitHub',
-            message: 'What is your github username?'
+            message: 'What is your gitHub username?'
         }
     ])
         .then(({ github }) => {
