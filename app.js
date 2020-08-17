@@ -35,12 +35,12 @@ const buildEngineer = employee => {
     inquirer.prompt([
         {
             type: 'input',
-            name: 'gitHub',
+            name: 'github',
             message: 'What is your gitHub username?'
         }
     ])
-        .then(({ gitHub }) => {
-            employees.push(new Engineer(employee.name, employee.id, employee.email, gitHub))
+        .then(({ github }) => {
+            employees.push(new Engineer(employee.name, employee.id, employee.email, github))
             subMenu()
         })
         .catch(err => console.log(err))
@@ -77,8 +77,8 @@ const subMenu = () => {
                 case 'Finish':
                     const html = render(employees)
                     fs.writeFileSync(path.join(__dirname, 'output',
-                    // Should this be main.html or index.html
-                     'index.html'), html)
+                        // Should this be main.html or index.html
+                        'index.html'), html)
                     break
 
             }
