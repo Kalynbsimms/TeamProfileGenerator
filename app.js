@@ -75,7 +75,9 @@ const subMenu = () => {
                     mainMenu()
                     break
                 case 'Finish':
+                    console.log(employees)
                     const html = render(employees)
+                    console.log(html)
                     fs.writeFileSync(path.join(__dirname, 'output',
                         // Should this be main.html or index.html
                         'index.html'), html)
@@ -93,7 +95,7 @@ const mainMenu = () => {
         {
             type: 'list',
             name: 'type',
-            choices: ['Employee', 'Manager', 'Engineer', 'Intern'],
+            choices: [ 'Manager', 'Engineer', 'Intern'],
             message: 'Select the type of role you would like to make'
         },
         {
@@ -114,10 +116,10 @@ const mainMenu = () => {
     ])
         .then(employee => {
             switch (employee.type) {
-                case 'Employee':
-                    employees.push(new Employee(employee.name, employee.id, employee.email))
-                    subMenu()
-                    break
+                // case 'Employee':
+                //     employees.push(new Employee(employee.name, employee.id, employee.email))
+                //     subMenu()
+                    // break
                 case 'Manager':
                     buildManager(employee)
                     break
