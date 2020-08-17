@@ -34,13 +34,57 @@ const buildEngineer = employee => {
  inquirer.prompt ([
      {
          type: 'input',
-         name: ''
+         name: 'gitHub',
+         message: 'What is your github username?'
      }
  ])
-
+.then(({github})=> {
+    employees.push(new Engineer(employee.name,employee.id,employee.email,gitHub))
+    subMenu()
+})
+.catch(err => console.log(err))
 }
 
+const buildIntern = employee => {
+    inquirer.prompt([
+        {
+            type:'input',
+            name: 'school',
+            message: 'What school do you attend?'
+        }
+    ])
+    .then (({school}) => {
+        employees.push(new Intern(employee.name,employee.id,employee.email,school))
+        subMenu()
+    })
+    .catch(err => console.log(err))
+    
+}
 
+const subMenu = () => {
+    inquirer.prompt({
+        type: 'list',
+        name: 'action',
+        choice : ['Make Another Employee','Finish'],
+        message: 'What would you like to do now?'
+    })
+    .then(({ action }) => {
+        switch (action) {
+        case 'Make Another Employee':
+        mainMenu()
+        break
+        case 'Finish':
+        const html = render (employees)
+                fs.writeFileSync(path.join(__dirname, 'output', 'main.html'), html)
+                break
+
+        }
+       })
+       .catch(err => console.log(err))
+
+
+        }
+    
 
 
 
