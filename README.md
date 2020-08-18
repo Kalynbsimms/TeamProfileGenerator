@@ -9,5 +9,19 @@ To use this application several npm packages need to be installed. Using the ter
  Types. You can create as many employees as you may like. Once all of the employees have been added to your team, select 'Finish'. The program will create  a 'index.html' page in the output folder with your Teams information.
 
 
+
+ **Successful Testing**
+
+ ![testex](testex.png)
+
+  **Questions Examples**
+
+ ![questions](questions.png)
+
+ **Team Roster**
+ 
+ ![teamex](teamex.png)
+
+
  
  
