@@ -1,3 +1,6 @@
+
+// 
+
 const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
@@ -12,7 +15,11 @@ const Intern = require("./lib/Intern");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+// Array that will house the Role types
+
 let employees = []
+
+// // Function creating the Manager Role type.
 
 const buildManager = employee => {
     inquirer.prompt([
@@ -22,7 +29,7 @@ const buildManager = employee => {
             message: `What is the manager's office number?`
         }
     ])
-
+// Pushes the Office Number into the Manager Role
         .then(({ officeNumber }) => {
             employees.push(new Manager(employee.name, employee.id, employee.email, officeNumber))
             subMenu()
@@ -31,6 +38,7 @@ const buildManager = employee => {
 }
 
 
+// Function creating the Engineer Role type.
 const buildEngineer = employee => {
     inquirer.prompt([
         {
@@ -39,6 +47,7 @@ const buildEngineer = employee => {
             message: 'What is your gitHub username?'
         }
     ])
+    // Pushes the github username into the Energineer Role
         .then(({ github }) => {
             employees.push(new Engineer(employee.name, employee.id, employee.email, github))
             subMenu()
@@ -46,6 +55,7 @@ const buildEngineer = employee => {
         .catch(err => console.log(err))
 }
 
+// // Function creating the Intern Role type.
 const buildIntern = employee => {
     inquirer.prompt([
         {
@@ -54,6 +64,7 @@ const buildIntern = employee => {
             message: 'What school do you attend?'
         }
     ])
+    // Pushes school into the Intern Role
         .then(({ school }) => {
             employees.push(new Intern(employee.name, employee.id, employee.email, school))
             subMenu()
@@ -62,6 +73,7 @@ const buildIntern = employee => {
 
 }
 
+// Sub Menu dedicated to excute once all the question for the Role type have been answered. Allows you to continue to build your team or finish. 
 const subMenu = () => {
     inquirer.prompt({
         type: 'list',
@@ -69,17 +81,18 @@ const subMenu = () => {
         choices: ['Make Another Employee', 'Finish'],
         message: 'What would you like to do now?'
     })
+    // If user selects to create another Employee, the main menu will restart
         .then(({ action }) => {
             switch (action) {
                 case 'Make Another Employee':
                     mainMenu()
                     break
+                    // If user selects Finish, HTML is created with the output data
                 case 'Finish':
                     console.log(employees)
                     const html = render(employees)
                     console.log(html)
                     fs.writeFileSync(path.join(__dirname, 'output',
-                        // Should this be main.html or index.html
                         'index.html'), html)
                     break
 
@@ -90,6 +103,7 @@ const subMenu = () => {
 
 }
 
+// First Question to ask user which role type should be selected. All employees require a name, id, and email 
 const mainMenu = () => {
     inquirer.prompt([
         {
@@ -114,12 +128,10 @@ const mainMenu = () => {
             message: 'Enter employee email address:'
         }
     ])
+    // Once the employee type is selected, the function will begin that particular role
         .then(employee => {
             switch (employee.type) {
-                // case 'Employee':
-                //     employees.push(new Employee(employee.name, employee.id, employee.email))
-                //     subMenu()
-                    // break
+                
                 case 'Manager':
                     buildManager(employee)
                     break
@@ -136,6 +148,7 @@ const mainMenu = () => {
         .catch(err => console.log(err))
 }
 
+// Intial Function
 mainMenu()
 
 
